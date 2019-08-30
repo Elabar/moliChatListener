@@ -1,0 +1,15 @@
+{
+    "manifest_version": 2,
+    "description": "To get notified when there is a new message from moli.surge.sh",
+    "name": "Moli Chat Listener",
+    "version": "0.0.1",
+    "background":{
+        "scripts": ["background.js"]
+    },
+    "icons": { 
+       "128": "noti.png" },
+    "permissions" : [
+        "notifications",
+        "tabs"
+    ]
+}
