@@ -1,5 +1,7 @@
+console.log("Connecting to the server...")
 var admin = new WebSocket("wss://cloud.achex.ca/moliAssist");
 admin.onopen = function(event){
+    console.log("Connected to the server")
     var data = {
         "auth": "CHECKSTATUSACC",
         "passwd": "none"
@@ -8,12 +10,18 @@ admin.onopen = function(event){
     var hub = {
         "joinHub": "moliAssist"
     }
+    console.log("Joining hub...")
     admin.send(JSON.stringify(hub));
 }
 
 admin.onmessage = function(event){
     var data = JSON.parse(event.data)
+    if(data.auth == "OK"){
+        console.log("Joined hub")
+        console.log("Listening to new message...")
+    }
     if(data.toH == "moliAssist" && data.msg != "JOINED MOLI ASSIST SERVER 023146") {
+        console.log(data)
         var msg = data.FROM + ": " + data.msg;
         chrome.tabs.query({
             active: true,
@@ -39,5 +47,10 @@ admin.onmessage = function(event){
                 chrome.notifications.create("", opt)
             }
         });
+        console.log("Listening to new message...")
     }
 }
+
+chrome.notifications.onClicked.addListener(function(notificationId, byUser) {
+    chrome.tabs.create({url: "https://moli.surge.sh/chatv2"});
+});
