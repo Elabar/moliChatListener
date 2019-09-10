@@ -2,10 +2,14 @@ console.log("Connecting to the server...")
 var admin = new WebSocket("wss://cloud.achex.ca/moliAssist");
 admin.onopen = function(event){
     console.log("Connected to the server")
-    setInterval(function(){ 
+    setInterval(function(){
         console.log("RC packet");
-        admin.send(JSON.stringify({"echo":true,"msg":"connected"})); 
-    }, 600000);
+        var joinNoti = {
+            "toH": "moliAssist",
+            "msg": "JOINED MOLI ASSIST SERVER 023146"
+        };
+        admin.send(JSON.stringify(joinNoti));
+    }, 300000);
     var data = {
         "auth": "CHECKSTATUSACC",
         "passwd": "none"
