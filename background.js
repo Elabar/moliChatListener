@@ -24,11 +24,12 @@ admin.onopen = function(event){
 
 admin.onmessage = function(event){
     var data = JSON.parse(event.data)
+    var notiOn = localStorage.getItem("noti")
     if(data.auth == "OK"){
         console.log("Joined hub")
         console.log("Listening to new message...")
     }
-    if(data.toH == "moliAssist" && data.msg != "JOINED MOLI ASSIST SERVER 023146") {
+    if(data.toH == "moliAssist" && data.msg != "JOINED MOLI ASSIST SERVER 023146" && (notiOn == "true" || notiOn === null)) {
         console.log(data)
         var msg = data.FROM + ": " + data.msg;
         chrome.tabs.query({
