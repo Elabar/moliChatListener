@@ -8,6 +8,11 @@
     },
     "icons": { 
        "128": "noti.png" },
+    "browser_action": {
+        "default_icon": "noti.png",
+        "default_title": "Moli Chat Listener",
+        "default_popup": "popup.html"
+    },
     "permissions" : [
         "notifications",
         "tabs"
